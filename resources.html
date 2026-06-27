@@ -45,6 +45,8 @@
       border-radius: 8px;
       margin: 16px 0;
       line-height: 1.8;
+      font-size: 1.1rem;
+      font-weight: bold;
     }
     .copy-button {
       background: #2563eb;
@@ -76,6 +78,22 @@
       font-weight: bold;
       font-size: 1rem;
     }
+    .sub-steps {
+      background: #0f172a;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 12px 0;
+      border-left: 4px solid #2563eb;
+    }
+    .sub-steps ol {
+      margin: 0;
+    }
+    .subtitle {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      font-style: italic;
+      margin-top: 4px;
+    }
   </style>
 </head>
 <body>
@@ -84,29 +102,31 @@
     <p>Build and publish your own game in 3 steps using vibe coding and AI.</p>
 
     <div class="card">
-      <h2><span class="step-number">1</span>Create Your Game</h2>
-      <p>Open <a href="https://github.com/new" target="_blank">github.com/new</a>, create a repository called <code>robot-runner</code> (public), then open it in <strong>Codespaces</strong>.</p>
-      <p>Click the Copilot chat window and paste this prompt:</p>
+      <h2><span class="step-number">1</span>Set Up GitHub Pages & Create Your Project</h2>
       
-      <div class="prompt-box">
-        <p>Create an HTML endless runner game where a robot jumps over obstacles.</p>
-        <p>The game should have:</p>
-        <ul style="margin: 8px 0; padding-left: 20px;">
-          <li>A robot character that jumps when you press spacebar</li>
-          <li>Obstacles that move from right to left</li>
-          <li>Game ends when robot hits an obstacle</li>
-          <li>Display the score on screen</li>
-          <li>Game gets faster over time</li>
-        </ul>
-        <button class="copy-button" onclick="copyToClipboard()">Copy Prompt</button>
+      <div class="sub-steps">
+        <ol>
+          <li>Go to <a href="https://github.com/new" target="_blank">github.com/new</a> and create a repository called <code>robot-runner</code> (make it public)</li>
+          <li>Click the green <strong>Code</strong> button and select <strong>Codespaces</strong> to open the editor</li>
+          <li>In Codespaces, create a new file called <code>index.html</code></li>
+        </ol>
       </div>
-
-      <p style="margin-top: 16px; font-style: italic;">Copilot will generate the full game code. Review it and let Copilot refine it as needed.</p>
     </div>
 
     <div class="card">
-      <h2><span class="step-number">2</span>Publish Your Game</h2>
-      <p>Once your game works in Codespaces, publish it online:</p>
+      <h2><span class="step-number">2</span>Open Your Project & Paste the Prompt</h2>
+      <p>Click the Copilot chat window on the right and paste this prompt:</p>
+      
+      <div class="prompt-box">
+        Create an HTML endless runner game where a robot jumps over obstacles.
+        <button class="copy-button" onclick="copyToClipboard()">Copy Prompt</button>
+      </div>
+
+      <p style="margin-top: 16px;">Copilot will generate the complete game code for you. Review it and let Copilot refine it as needed until the game works.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="step-number">3</span>Publish Your Game</h2>
       
       <ol>
         <li><strong>Commit and push</strong> — Click Source Control (left sidebar), commit your changes, and push to GitHub</li>
@@ -118,38 +138,31 @@
             <li>Select <strong>main</strong> branch and click <strong>Save</strong></li>
           </ul>
         </li>
-        <li><strong>Share your game</strong> — Your game is live at: <code>https://YOUR-USERNAME.github.io/robot-runner/</code></li>
+        <li><strong>View your game online</strong> — Your game is live at: <code>https://YOUR-USERNAME.github.io/robot-runner/</code></li>
       </ol>
     </div>
 
     <div class="card">
-      <h2><span class="step-number">3</span>Refine Your Game</h2>
-      <p>Now the magic happens! Use Copilot to improve your game. Try asking for:</p>
+      <h2><span class="step-number">4</span>Refine Your Game</h2>
+      <p class="subtitle">This is where the magic happens</p>
+      
+      <p style="margin-top: 16px;">Now use Copilot to improve your game. Try asking for:</p>
       <ul>
         <li>Better graphics, colors, or animations</li>
-        <li>Sound effects when jumping or hitting obstacles</li>
+        <li>Sound effects</li>
         <li>Different types of obstacles</li>
         <li>Power-ups or special items</li>
         <li>A leaderboard or high score tracker</li>
-        <li>Mobile controls (touch/swipe)</li>
+        <li>Mobile controls</li>
         <li>New difficulty levels</li>
       </ul>
-      <p style="margin-top: 16px;"><strong>Each change:</strong> Ask Copilot, review the code, test it, commit, push, and your live game updates automatically!</p>
-    </div>
-
-    <div class="card">
-      <h2>Helpful Resources</h2>
-      <ul>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank">MDN Canvas API</a> — Graphics and drawing</li>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent" target="_blank">MDN Keyboard Events</a> — Detecting key presses</li>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Games/Anatomy" target="_blank">MDN Game Loop</a> — How games work</li>
-      </ul>
+      <p style="margin-top: 16px;"><strong>The cycle:</strong> Ask Copilot → Review code → Test it → Commit & push → Your live game updates automatically!</p>
     </div>
   </main>
 
   <script>
     function copyToClipboard() {
-      const prompt = "Create an HTML endless runner game where a robot jumps over obstacles.\n\nThe game should have:\n- A robot character that jumps when you press spacebar\n- Obstacles that move from right to left\n- Game ends when robot hits an obstacle\n- Display the score on screen\n- Game gets faster over time";
+      const prompt = "Create an HTML endless runner game where a robot jumps over obstacles.";
       navigator.clipboard.writeText(prompt).then(() => {
         alert('Prompt copied to clipboard!');
       });
