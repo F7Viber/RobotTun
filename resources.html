@@ -36,6 +36,7 @@
       padding: 2px 6px;
       border-radius: 4px;
       color: #f8fafc;
+      font-family: 'Courier New', monospace;
     }
     ol, ul {
       padding-left: 20px;
@@ -50,57 +51,144 @@
       margin-right: 8px;
       margin-bottom: 8px;
     }
+    .step-number {
+      display: inline-block;
+      background: #2563eb;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+    .asset-link {
+      display: block;
+      background: #1e293b;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border-left: 4px solid #2563eb;
+    }
+    .prompt-box {
+      background: #1e293b;
+      border-left: 4px solid #10b981;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 16px 0;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
   <main>
     <h1>Robot Runner: Student Guide</h1>
-    <p>This project is a simple browser-based game that helps teens explore “vibe coding” through quick visual feedback, simple changes, and creative experimentation.</p>
+    <p>Welcome! This guide will help you get set up and start building your own endless runner game.</p>
 
     <div class="card">
-      <h2>Why this works well for teens</h2>
-      <ul>
-        <li>It is fast to open and play.</li>
-        <li>Students can change one thing and immediately see the result.</li>
-        <li>It mixes creativity, logic, and experimentation.</li>
-        <li>It stays low-pressure because the project is small and approachable.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>Quick setup guide</h2>
+      <h2>Getting Started with GitHub Pages</h2>
+      <p>Follow these steps to set up your workspace and preview your game live:</p>
       <ol>
-        <li>Open the project folder in VS Code.</li>
-        <li>Open the terminal and run: <code>python3 -m http.server 8000</code></li>
-        <li>Open your browser at <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>.</li>
-        <li>To edit the game, open <a href="index.html">index.html</a> and change the code.</li>
-        <li>Refresh the page to preview your changes.</li>
+        <li><span class="step-number">1</span><strong>Fork the repository</strong><br>
+          Go to <a href="https://github.com/F7Viber/RobotTun" target="_blank">F7Viber/RobotTun</a> and click the "Fork" button in the top right to create your own copy.
+        </li>
+        <li><span class="step-number">2</span><strong>Clone your fork</strong><br>
+          Open your terminal and run:<br>
+          <code>git clone https://github.com/YOUR-USERNAME/RobotTun.git</code><br>
+          (Replace YOUR-USERNAME with your GitHub username)
+        </li>
+        <li><span class="step-number">3</span><strong>Open the project</strong><br>
+          Open the project folder in VS Code or your favorite editor.
+        </li>
+        <li><span class="step-number">4</span><strong>Start a local server</strong><br>
+          Open the terminal and run:<br>
+          <code>python3 -m http.server 8000</code><br>
+          Then open <a href="http://127.0.0.1:8000/" target="_blank">http://127.0.0.1:8000/</a> in your browser.
+        </li>
+        <li><span class="step-number">5</span><strong>Edit and refresh</strong><br>
+          Edit <code>index.html</code> in your editor, save, then refresh your browser to see changes.
+        </li>
+        <li><span class="step-number">6</span><strong>Push to GitHub Pages</strong><br>
+          When you're ready to share, commit your changes and push them:<br>
+          <code>git add .</code><br>
+          <code>git commit -m "Initial endless runner game"</code><br>
+          <code>git push origin main</code><br>
+          Your game will be live at: <code>https://YOUR-USERNAME.github.io/RobotTun/</code>
+        </li>
       </ol>
     </div>
 
     <div class="card">
-      <h2>What to try first</h2>
+      <h2>Game Assets & Resources</h2>
+      <p>Use these resources to build your endless runner:</p>
+      
+      <h3>Sprites & Graphics</h3>
+      <div class="asset-link">
+        <strong>Robot Icon:</strong> <a href="https://www.flaticon.com/search?word=robot&color=red" target="_blank">Flaticon - Robot</a> (search for simple red robot icons)
+      </div>
+      <div class="asset-link">
+        <strong>Obstacle Graphics:</strong> <a href="https://www.flaticon.com/search?word=obstacle%20box&color=red" target="_blank">Flaticon - Obstacles</a> (boxes, walls, or barriers)
+      </div>
+      <div class="asset-link">
+        <strong>Background Tiles:</strong> <a href="https://www.flaticon.com/search?word=ground%20tile&color=blue" target="_blank">Flaticon - Ground Tiles</a> (for ground or sky patterns)
+      </div>
+
+      <h3>Tools & References</h3>
+      <div class="asset-link">
+        <strong>Canvas API Docs:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank">MDN - Canvas API</a> (JavaScript drawing)
+      </div>
+      <div class="asset-link">
+        <strong>Game Loop Tutorial:</strong> <a href="https://developer.mozilla.org/en-US/docs/Games/Anatomy" target="_blank">MDN - Game Anatomy</a> (how game loops work)
+      </div>
+      <div class="asset-link">
+        <strong>Collision Detection:</strong> <a href="https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_collision_detection" target="_blank">MDN - Collision Detection</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Your First Challenge</h2>
+      <div class="prompt-box">
+        <p><strong>Create an endless runner game where:</strong></p>
+        <ul>
+          <li>A robot character appears on screen and can jump when you press the spacebar</li>
+          <li>Obstacles spawn from the right side and move toward the left</li>
+          <li>If the robot collides with an obstacle, the game ends and shows your score</li>
+          <li>As time passes, the game gets faster</li>
+          <li>Display the current score on screen</li>
+        </ul>
+      </div>
+      <p><strong>Start with:</strong></p>
       <ul>
-        <li>Change the robot speed.</li>
-        <li>Make the jumps higher or lower.</li>
-        <li>Add a new obstacle style.</li>
-        <li>Change the background colors.</li>
-        <li>Add a score or timer.</li>
+        <li>Draw simple shapes (rectangles) for the robot and obstacles using the Canvas API</li>
+        <li>Implement keyboard input to make the robot jump</li>
+        <li>Move obstacles across the screen in a game loop</li>
+        <li>Check if the robot and obstacle overlap (collision detection)</li>
       </ul>
     </div>
 
     <div class="card">
-      <h2>Good beginner ideas</h2>
-      <span class="pill">Simple</span>
-      <span class="pill">Visual</span>
-      <span class="pill">Creative</span>
-      <span class="pill">Fast feedback</span>
-      <p>Start with one small change at a time. That helps students learn by building confidence rather than feeling overwhelmed.</p>
+      <h2>Tips for Success</h2>
+      <ul>
+        <li><strong>Start simple:</strong> Get the basic game loop working before adding fancy graphics.</li>
+        <li><strong>Test often:</strong> Refresh your browser after every few changes.</li>
+        <li><strong>Break it down:</strong> Work on jumping, then obstacles, then collisions, then scoring.</li>
+        <li><strong>Use the console:</strong> Press F12 to open developer tools and check for errors.</li>
+        <li><strong>Ask for help:</strong> If you're stuck, describe what you're trying to do and what's happening instead.</li>
+      </ul>
     </div>
 
     <div class="card">
-      <h2>Helpful tip</h2>
-      <p>When students are stuck, ask them to change one value and predict what will happen before they refresh the page. That turns coding into a game of experimentation.</p>
+      <h2>Next Steps (Build on Your Game)</h2>
+      <p>Once you have the basics working, try adding:</p>
+      <ul>
+        <li>Better graphics and animations</li>
+        <li>Sound effects</li>
+        <li>Different obstacle types</li>
+        <li>Power-ups or special items</li>
+        <li>A leaderboard to track high scores</li>
+        <li>Mobile touch controls</li>
+      </ul>
     </div>
   </main>
 </body>
