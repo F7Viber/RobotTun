@@ -38,21 +38,17 @@
       color: #f8fafc;
       font-family: 'Courier New', monospace;
     }
-    .code-block {
+    .prompt-box {
       background: #1e293b;
+      border-left: 4px solid #10b981;
       padding: 16px;
       border-radius: 8px;
-      margin: 12px 0;
-      overflow-x: auto;
-      border-left: 4px solid #2563eb;
+      margin: 16px 0;
+      padding: 20px;
+      line-height: 1.8;
     }
-    .code-block code {
-      background: none;
-      padding: 0;
-      display: block;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      font-size: 0.9rem;
+    .prompt-box p {
+      margin: 8px 0;
     }
     ol, ul {
       padding-left: 20px;
@@ -69,13 +65,6 @@
       margin-right: 10px;
       font-weight: bold;
       font-size: 0.9rem;
-    }
-    .challenge-box {
-      background: #1e293b;
-      border-left: 4px solid #10b981;
-      padding: 16px;
-      border-radius: 8px;
-      margin: 16px 0;
     }
     .btn {
       display: inline-block;
@@ -96,12 +85,13 @@
 <body>
   <main>
     <h1>Robot Runner: Build Your Game</h1>
-    <p>In this workshop, you'll create your own endless runner game in HTML. All you need is curiosity!</p>
+    <p>In this workshop, you'll create your own endless runner game in HTML. Let's go!</p>
 
     <div class="card">
       <h2>Your Challenge</h2>
-      <div class="challenge-box">
+      <div class="prompt-box">
         <p><strong>Create an HTML endless runner game where a robot jumps over obstacles.</strong></p>
+        <p>Build it from scratch with these features:</p>
         <ul>
           <li>A robot character on screen that jumps when you press the spacebar</li>
           <li>Obstacles appear and move from right to left</li>
@@ -132,34 +122,6 @@
           Click the green <strong>Code</strong> button, select <strong>Codespaces</strong>, and create a new file called <code>index.html</code>
         </li>
       </ol>
-    </div>
-
-    <div class="card">
-      <h2>Starter Template</h2>
-      <p>Copy this into your <code>index.html</code> file to get started:</p>
-      <div class="code-block">
-        <code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;Robot Runner&lt;/title&gt;
-  &lt;style&gt;
-    body { margin: 0; }
-    canvas { display: block; background: #87ceeb; }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;canvas id="gameCanvas" width="800" height="400"&gt;&lt;/canvas&gt;
-  &lt;script&gt;
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-
-    // Your game code goes here!
-
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code>
-      </div>
-      <p>Now build your game inside the <code>&lt;script&gt;</code> tag!</p>
     </div>
 
     <div class="card">
@@ -203,28 +165,6 @@
         <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank">MDN Canvas API</a> - Draw shapes and graphics</li>
         <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent" target="_blank">MDN Keyboard Events</a> - Detect key presses</li>
         <li><a href="https://developer.mozilla.org/en-US/docs/Games/Anatomy" target="_blank">MDN Game Loop</a> - How game loops work</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>Tips</h2>
-      <ul>
-        <li><strong>Start simple:</strong> Draw the robot and obstacles first, then add movement.</li>
-        <li><strong>Test constantly:</strong> Save and refresh to see your changes.</li>
-        <li><strong>Break it down:</strong> Work on one feature at a time.</li>
-        <li><strong>Use the console:</strong> Press F12 to see errors.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>What's Next?</h2>
-      <p>Once your game works, try adding:</p>
-      <ul>
-        <li>Better graphics and animations</li>
-        <li>Sound effects</li>
-        <li>Different obstacle types</li>
-        <li>Power-ups</li>
-        <li>A high score tracker</li>
       </ul>
     </div>
   </main>
