@@ -41,16 +41,6 @@
     ol, ul {
       padding-left: 20px;
     }
-    .pill {
-      display: inline-block;
-      background: #2563eb;
-      color: white;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      margin-right: 8px;
-      margin-bottom: 8px;
-    }
     .step-number {
       display: inline-block;
       background: #2563eb;
@@ -62,6 +52,7 @@
       line-height: 28px;
       margin-right: 10px;
       font-weight: bold;
+      font-size: 0.9rem;
     }
     .asset-link {
       display: block;
@@ -77,73 +68,50 @@
       padding: 16px;
       border-radius: 8px;
       margin: 16px 0;
-      font-style: italic;
+    }
+    .btn {
+      display: inline-block;
+      background: #2563eb;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    .btn:hover {
+      background: #1d4ed8;
     }
   </style>
 </head>
 <body>
   <main>
-    <h1>Robot Runner: Student Guide</h1>
-    <p>Welcome! This guide will help you get set up and start building your own endless runner game.</p>
+    <h1>Robot Runner: Build Your Game</h1>
+    <p>In this workshop, you'll create your own endless runner game. No experience needed—just creativity and curiosity!</p>
 
     <div class="card">
-      <h2>Getting Started with GitHub Pages</h2>
-      <p>Follow these steps to set up your workspace and preview your game live:</p>
+      <h2>Quick Start (3 steps)</h2>
+      
       <ol>
-        <li><span class="step-number">1</span><strong>Fork the repository</strong><br>
-          Go to <a href="https://github.com/F7Viber/RobotTun" target="_blank">F7Viber/RobotTun</a> and click the "Fork" button in the top right to create your own copy.
+        <li>
+          <span class="step-number">1</span><strong>Create a GitHub account</strong><br>
+          <a href="https://github.com/signup" target="_blank" class="btn">Sign Up for GitHub</a>
+          (It's free and takes 2 minutes)
         </li>
-        <li><span class="step-number">2</span><strong>Clone your fork</strong><br>
-          Open your terminal and run:<br>
-          <code>git clone https://github.com/YOUR-USERNAME/RobotTun.git</code><br>
-          (Replace YOUR-USERNAME with your GitHub username)
+        
+        <li>
+          <span class="step-number">2</span><strong>Create a new project</strong><br>
+          Go to <a href="https://github.com/new" target="_blank">github.com/new</a> and create a repository called <code>robot-runner</code><br>
+          (Keep it public and add a README)
         </li>
-        <li><span class="step-number">3</span><strong>Open the project</strong><br>
-          Open the project folder in VS Code or your favorite editor.
-        </li>
-        <li><span class="step-number">4</span><strong>Start a local server</strong><br>
-          Open the terminal and run:<br>
-          <code>python3 -m http.server 8000</code><br>
-          Then open <a href="http://127.0.0.1:8000/" target="_blank">http://127.0.0.1:8000/</a> in your browser.
-        </li>
-        <li><span class="step-number">5</span><strong>Edit and refresh</strong><br>
-          Edit <code>index.html</code> in your editor, save, then refresh your browser to see changes.
-        </li>
-        <li><span class="step-number">6</span><strong>Push to GitHub Pages</strong><br>
-          When you're ready to share, commit your changes and push them:<br>
-          <code>git add .</code><br>
-          <code>git commit -m "Initial endless runner game"</code><br>
-          <code>git push origin main</code><br>
-          Your game will be live at: <code>https://YOUR-USERNAME.github.io/RobotTun/</code>
+        
+        <li>
+          <span class="step-number">3</span><strong>Start coding</strong><br>
+          Click the green <strong>Code</strong> button and select <strong>Codespaces</strong><br>
+          Then create a new file called <code>index.html</code> and start building!
         </li>
       </ol>
-    </div>
-
-    <div class="card">
-      <h2>Game Assets & Resources</h2>
-      <p>Use these resources to build your endless runner:</p>
-      
-      <h3>Sprites & Graphics</h3>
-      <div class="asset-link">
-        <strong>Robot Icon:</strong> <a href="https://www.flaticon.com/search?word=robot&color=red" target="_blank">Flaticon - Robot</a> (search for simple red robot icons)
-      </div>
-      <div class="asset-link">
-        <strong>Obstacle Graphics:</strong> <a href="https://www.flaticon.com/search?word=obstacle%20box&color=red" target="_blank">Flaticon - Obstacles</a> (boxes, walls, or barriers)
-      </div>
-      <div class="asset-link">
-        <strong>Background Tiles:</strong> <a href="https://www.flaticon.com/search?word=ground%20tile&color=blue" target="_blank">Flaticon - Ground Tiles</a> (for ground or sky patterns)
-      </div>
-
-      <h3>Tools & References</h3>
-      <div class="asset-link">
-        <strong>Canvas API Docs:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank">MDN - Canvas API</a> (JavaScript drawing)
-      </div>
-      <div class="asset-link">
-        <strong>Game Loop Tutorial:</strong> <a href="https://developer.mozilla.org/en-US/docs/Games/Anatomy" target="_blank">MDN - Game Anatomy</a> (how game loops work)
-      </div>
-      <div class="asset-link">
-        <strong>Collision Detection:</strong> <a href="https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_collision_detection" target="_blank">MDN - Collision Detection</a>
-      </div>
     </div>
 
     <div class="card">
@@ -158,36 +126,55 @@
           <li>Display the current score on screen</li>
         </ul>
       </div>
-      <p><strong>Start with:</strong></p>
+      
+      <p><strong>Start by building:</strong></p>
       <ul>
-        <li>Draw simple shapes (rectangles) for the robot and obstacles using the Canvas API</li>
-        <li>Implement keyboard input to make the robot jump</li>
-        <li>Move obstacles across the screen in a game loop</li>
-        <li>Check if the robot and obstacle overlap (collision detection)</li>
+        <li>Draw simple shapes (rectangles) for the robot and obstacles</li>
+        <li>Make the robot jump with the spacebar</li>
+        <li>Move obstacles across the screen</li>
+        <li>Check if the robot and obstacle collide</li>
+        <li>Keep track of the score</li>
       </ul>
+    </div>
+
+    <div class="card">
+      <h2>Helpful Resources</h2>
+      <p>Stuck? Check these out:</p>
+      
+      <div class="asset-link">
+        <strong>Canvas API:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank">MDN - Draw shapes and graphics</a>
+      </div>
+      
+      <div class="asset-link">
+        <strong>Game Loop:</strong> <a href="https://developer.mozilla.org/en-US/docs/Games/Anatomy" target="_blank">MDN - How game loops work</a>
+      </div>
+      
+      <div class="asset-link">
+        <strong>Keyboard Input:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent" target="_blank">MDN - Detect key presses</a>
+      </div>
     </div>
 
     <div class="card">
       <h2>Tips for Success</h2>
       <ul>
-        <li><strong>Start simple:</strong> Get the basic game loop working before adding fancy graphics.</li>
-        <li><strong>Test often:</strong> Refresh your browser after every few changes.</li>
-        <li><strong>Break it down:</strong> Work on jumping, then obstacles, then collisions, then scoring.</li>
-        <li><strong>Use the console:</strong> Press F12 to open developer tools and check for errors.</li>
-        <li><strong>Ask for help:</strong> If you're stuck, describe what you're trying to do and what's happening instead.</li>
+        <li><strong>Start simple:</strong> Get the game loop working first, add complexity later.</li>
+        <li><strong>Test constantly:</strong> Save your code and refresh to see changes immediately.</li>
+        <li><strong>Break it down:</strong> Work on one thing at a time (jumping, then obstacles, then collisions).</li>
+        <li><strong>Use the browser console:</strong> Press F12 to see errors and debug.</li>
+        <li><strong>Ask for help:</strong> Stuck? Describe what you're trying to do.</li>
       </ul>
     </div>
 
     <div class="card">
-      <h2>Next Steps (Build on Your Game)</h2>
-      <p>Once you have the basics working, try adding:</p>
+      <h2>What's Next?</h2>
+      <p>Once your game works, try adding:</p>
       <ul>
-        <li>Better graphics and animations</li>
+        <li>Better graphics and colors</li>
         <li>Sound effects</li>
-        <li>Different obstacle types</li>
+        <li>Different types of obstacles</li>
         <li>Power-ups or special items</li>
-        <li>A leaderboard to track high scores</li>
-        <li>Mobile touch controls</li>
+        <li>A high score leaderboard</li>
+        <li>Mobile controls (touch/swipe)</li>
       </ul>
     </div>
   </main>
