@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Robot Runner</title>
+<style>
+  body {
+    margin: 0;
+    background: #0d1117;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Courier New', monospace;
+    color: #c9d1d9;
+  }
+  h1 { margin: 16px 0 4px; letter-spacing: 2px; }
+  .guide-link {
+    margin-bottom: 8px;
+    color: #7dd3fc;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .guide-link:hover { text-decoration: underline; }
+  #hud {
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+    margin: 8px 0;
+    font-size: 18px;
+  }
+  canvas {
+    background: linear-gradient(#1f2937, #111827);
+    border: 3px solid #30363d;
+    border-radius: 8px;
+  }
+  #startBtn {
+    margin-top: 16px;
+    padding: 10px 24px;
+    font-size: 18px;
+    font-family: inherit;
+    background: #238636;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  #startBtn:hover { background: #2ea043; }
+  #message {
+    height: 24px;
+    margin-top: 8px;
+    font-size: 16px;
+    color: #f85149;
+  }
+  #tuning {
+    margin-top: 12px;
+    width: 600px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 6px 0;
+    font-size: 14px;
+  }
+  .slider-row label { width: 100px; }
+  .slider-row input[type="range"] { flex: 1; }
+  .slider-row span { width: 40px; text-align: right; color: #58a6ff; }
+</style>
+</head>
+<body>
+  <img id="robotSprite"
+     src="RunCycle.png" alt="Robot" style="display:none;">
+<img id="spike26" src="Spikes_46x26.png" style="display:none;">
+<img id="spike46" src="Spikes_46x46.png" style="display:none;">
+<img id="spike64" src="Spikes_64x64.png" style="display:none;">
+<h1>ROBOT RUNNER</h1>
+<a class="guide-link" href="resources.html" target="_blank">Open student guide</a>
+<div id="hud">
+  <div>Distance: <span id="distance">0</span>m</div>
+  <div>Best: <span id="best">0</span>m</div>
+</div>
+<canvas id="game" width="600" height="300"></canvas>
+<button id="startBtn">Start Run</button>
+<div id="message"></div>
+
+<div id="tuning">
+  <div class="slider-row">
+    <label for="gravitySlider">Gravity</label>
+    <input type="range" id="gravitySlider" min="0.15" max="1.2" step="0.01" value="0.45">
+    <span id="gravityVal">0.45</span>
+  </div>
+  <div class="slider-row">
+    <label for="jumpSlider">Jump Height</label>
+    <input type="range" id="jumpSlider" min="6" max="20" step="0.5" value="14.5">
+    <span id="jumpVal">14.5</span>
+  </div>
+  <div class="slider-row">
+    <label for="speedSlider">Speed</label>
+    <input type="range" id="speedSlider" min="1" max="10" step="0.5" value="1.5">
+    <span id="speedVal">1.5</span>
+  </div>
+  <div class="slider-row">
+    <label for="gapSlider">Obstacle Gap</label>
+    <input type="range" id="gapSlider" min="20" max="150" step="5" value="125">
+    <span id="gapVal">125</span>
+  </div>
+
+  <div class="slider-row">
+    <label for="toleranceSlider">Hit Tolerance</label>
+    <input type="range" id="toleranceSlider" min="0" max="20" step="1" value="10">
+    <span id="toleranceVal">10</span>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+const distanceEl = document.getElementById('distance');
+const bestEl = document.getElementById('best');
+const startBtn = document.getElementById('startBtn');
+const messageEl = document.getElementById('message');
+const gravitySlider = document.getElementById('gravitySlider');
+const jumpSlider = document.getElementById('jumpSlider');
+const speedSlider = document.getElementById('speedSlider');
+const gapSlider = document.getElementById('gapSlider');
+const gravityVal = document.getElementById('gravityVal');
+const jumpVal = document.getElementById('jumpVal');
+const speedVal = document.getElementById('speedVal');
+const gapVal = document.getElementById('gapVal');
+const toleranceSlider=document.getElementById('toleranceSlider');
+const toleranceVal=document.getElementById('toleranceVal');
+
+let jumpForce = parseFloat(jumpSlider.value);
+let baseSpeed = parseFloat(speedSlider.value);
+let obstacleGap=parseFloat(gapSlider.value);
+let hitTolerance=10;
+
+gravitySlider.addEventListener('input', () => {
+  gravity = parseFloat(gravitySlider.value);
+  gravityVal.innerText = gravity.toFixed(2);
+});
+jumpSlider.addEventListener('input', () => {
+  jumpForce = parseFloat(jumpSlider.value);
+  jumpVal.innerText = jumpForce;
+});
+speedSlider.addEventListener('input', () => {
+  baseSpeed = parseFloat(speedSlider.value);
+  speedVal.innerText = baseSpeed;
+  if (!running) speed = baseSpeed;
+});
+gapSlider.addEventListener('input',()=>{obstacleGap=parseFloat(gapSlider.value);gapVal.innerText=obstacleGap;});
+toleranceSlider.addEventListener('input',()=>{hitTolerance=parseInt(toleranceSlider.value);toleranceVal.innerText=hitTolerance;});
+
+const groundY = 240;
+const robotSprite=document.getElementById('robotSprite');
+const spikeTypes=[
+{img:document.getElementById('spike26'),w:46,h:26},
+{img:document.getElementById('spike46'),w:46,h:46},
+{img:document.getElementById('spike64'),w:64,h:64}
+];
+const FRAME_W = 100;
+const FRAME_H = 120;
+const FRAME_COUNT = 10;
+let animFrame = 0;
+let animTimer = 0;
+
+let robot, obstacles, distance, speed, gravity, running, bestDistance;
+
+function resetState() {
+  robot = { x: 60, y: groundY - 40, w: 40, h: 40, vy: 0, jumping: false };
+  obstacles = [];
+  distance = 0;
+  speed = baseSpeed;
+  gravity = parseFloat(gravitySlider.value);
+  running = false;
+  bestDistance = bestDistance || 0;
+  distanceEl.innerText = '0';
+  bestEl.innerText = bestDistance;
+  messageEl.innerText = '';
+  animFrame = 0;
+  animTimer = 0;
+}
+resetState();
+
+function spawnObstacle(){
+ const difficulty=1.2;
+ const maxCluster=Math.min(6,1+Math.floor(Math.max(0,speed-baseSpeed)*difficulty));
+ const count=1+Math.floor(Math.random()*maxCluster);
+ let x=canvas.width;
+ for(let n=0;n<count;n++){
+  const t=spikeTypes[Math.floor(Math.random()*spikeTypes.length)];
+  obstacles.push({x:x,y:groundY-t.h,w:t.w,h:t.h,img:t.img});
+  x+=t.w-6;
+ }
+}
+
+let spawnTimer = 0;
+function update() {
+  if (!running) return;
+
+  // jump physics
+  robot.vy += gravity;
+  robot.y += robot.vy;
+  if (robot.y > groundY - robot.h) {
+    robot.y = groundY - robot.h;
+    robot.vy = 0;
+    robot.jumping = false;
+  }
+
+  // spawn obstacles
+  spawnTimer++;
+  if (spawnTimer > obstacleGap) {
+    spawnObstacle();
+    spawnTimer = 0;
+  }
+
+  // move obstacles
+  obstacles.forEach(o => o.x -= speed);
+  obstacles = obstacles.filter(o => o.x + o.w > 0);
+
+  // collision check
+  for (const o of obstacles) {
+    const hb={x:o.x+hitTolerance,y:o.y+hitTolerance,w:o.w-hitTolerance*2,h:o.h-hitTolerance};
+    if(robot.x<hb.x+hb.w&&robot.x+robot.w>hb.x&&robot.y<hb.y+hb.h&&robot.y+robot.h>hb.y){
+      endRun();
+      return;
+    }
+  }
+
+  // increase difficulty + distance
+  distance += speed / 10;
+  speed += 0.002;
+  distanceEl.innerText = Math.floor(distance);
+
+  // advance run animation (faster when on ground, frozen mid-jump)
+  if (!robot.jumping) {
+    animTimer++;
+    if (animTimer > 5) {
+      animFrame = (animFrame + 1) % FRAME_COUNT;
+      animTimer = 0;
+    }
+  }
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // ground line
+  ctx.strokeStyle = '#30363d';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, groundY);
+  ctx.lineTo(canvas.width, groundY);
+  ctx.stroke();
+
+  // robot (sprite sheet frame)
+  const drawH = 56;
+  const drawW = drawH * (FRAME_W / FRAME_H);
+  const frameToShow = robot.jumping ? 0 : animFrame;
+  ctx.drawImage(
+    robotSprite,
+    frameToShow * FRAME_W, 0, FRAME_W, FRAME_H,
+    robot.x - (drawW - robot.w) / 2, robot.y - (drawH - robot.h),
+    drawW, drawH
+  );
+
+  // obstacles
+  obstacles.forEach(o=>ctx.drawImage(o.img,o.x,o.y,o.w,o.h));
+}
+
+function loop() {
+  update();
+  draw();
+  requestAnimationFrame(loop);
+}
+
+function jump() {
+  if (running && !robot.jumping) {
+    robot.vy = -jumpForce;
+    robot.jumping = true;
+  }
+}
+
+function endRun() {
+  running = false;
+  if (distance > bestDistance) {
+    bestDistance = Math.floor(distance);
+    bestEl.innerText = bestDistance;
+  }
+  messageEl.innerText = 'Crashed! Press Start Run to try again.';
+  startBtn.innerText = 'Start Run';
+}
+
+startBtn.addEventListener('click', () => {
+  resetState();
+  bestEl.innerText = bestDistance;
+  running = true;
+  startBtn.innerText = 'Restart';
+});
+
+document.addEventListener('keydown', e => {
+  if (e.code === 'Space' || e.key === 'ArrowUp') {
+    e.preventDefault();
+    jump();
+  }
+});
+canvas.addEventListener('mousedown', jump);
+
+draw();
+loop();
+</script>
+</body>
+</html>
