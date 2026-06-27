@@ -38,6 +38,22 @@
       color: #f8fafc;
       font-family: 'Courier New', monospace;
     }
+    .code-block {
+      background: #1e293b;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 12px 0;
+      overflow-x: auto;
+      border-left: 4px solid #2563eb;
+    }
+    .code-block code {
+      background: none;
+      padding: 0;
+      display: block;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-size: 0.9rem;
+    }
     ol, ul {
       padding-left: 20px;
     }
@@ -54,15 +70,7 @@
       font-weight: bold;
       font-size: 0.9rem;
     }
-    .asset-link {
-      display: block;
-      background: #1e293b;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 8px;
-      border-left: 4px solid #2563eb;
-    }
-    .prompt-box {
+    .challenge-box {
       background: #1e293b;
       border-left: 4px solid #10b981;
       padding: 16px;
@@ -88,74 +96,123 @@
 <body>
   <main>
     <h1>Robot Runner: Build Your Game</h1>
-    <p>In this workshop, you'll create your own endless runner game. No experience needed—just creativity and curiosity!</p>
+    <p>In this workshop, you'll create your own endless runner game in HTML. All you need is curiosity!</p>
 
     <div class="card">
-      <h2>Quick Start (3 steps)</h2>
+      <h2>Your Challenge</h2>
+      <div class="challenge-box">
+        <p><strong>Create an HTML endless runner game where a robot jumps over obstacles.</strong></p>
+        <ul>
+          <li>A robot character on screen that jumps when you press the spacebar</li>
+          <li>Obstacles appear and move from right to left</li>
+          <li>The game ends when the robot hits an obstacle</li>
+          <li>Display the score as the game progresses</li>
+          <li>The game gets faster over time</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Setup (3 Steps)</h2>
       
       <ol>
         <li>
           <span class="step-number">1</span><strong>Create a GitHub account</strong><br>
           <a href="https://github.com/signup" target="_blank" class="btn">Sign Up for GitHub</a>
-          (It's free and takes 2 minutes)
         </li>
         
         <li>
           <span class="step-number">2</span><strong>Create a new project</strong><br>
           Go to <a href="https://github.com/new" target="_blank">github.com/new</a> and create a repository called <code>robot-runner</code><br>
-          (Keep it public and add a README)
+          (Make it public and add a README)
         </li>
         
         <li>
           <span class="step-number">3</span><strong>Start coding</strong><br>
-          Click the green <strong>Code</strong> button and select <strong>Codespaces</strong><br>
-          Then create a new file called <code>index.html</code> and start building!
+          Click the green <strong>Code</strong> button, select <strong>Codespaces</strong>, and create a new file called <code>index.html</code>
         </li>
       </ol>
     </div>
 
     <div class="card">
-      <h2>Your First Challenge</h2>
-      <div class="prompt-box">
-        <p><strong>Create an endless runner game where:</strong></p>
-        <p>Create an HTML  endless runner game where a robot jumps over obstacles</p>
+      <h2>Starter Template</h2>
+      <p>Copy this into your <code>index.html</code> file to get started:</p>
+      <div class="code-block">
+        <code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Robot Runner&lt;/title&gt;
+  &lt;style&gt;
+    body { margin: 0; }
+    canvas { display: block; background: #87ceeb; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;canvas id="gameCanvas" width="800" height="400"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Your game code goes here!
+
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code>
       </div>
+      <p>Now build your game inside the <code>&lt;script&gt;</code> tag!</p>
+    </div>
+
+    <div class="card">
+      <h2>How to Publish Your Game Online</h2>
+      <p>Once your game works, follow these steps to share it with the world:</p>
       
-      <p><strong>Start by building:</strong></p>
-      <ul>
-        <li>Draw simple shapes (rectangles) for the robot and obstacles</li>
-        <li>Make the robot jump with the spacebar</li>
-        <li>Move obstacles across the screen</li>
-        <li>Check if the robot and obstacle collide</li>
-        <li>Keep track of the score</li>
-      </ul>
+      <ol>
+        <li>
+          <span class="step-number">1</span><strong>Save your code</strong><br>
+          Make sure your game code is saved in Codespaces.
+        </li>
+        
+        <li>
+          <span class="step-number">2</span><strong>Commit your changes</strong><br>
+          In Codespaces, click the Source Control icon (left sidebar), write a message like "Add my robot runner game", and click Commit & Push.
+        </li>
+        
+        <li>
+          <span class="step-number">3</span><strong>Enable GitHub Pages</strong><br>
+          Go to your repository settings:
+          <ul style="margin-top: 8px;">
+            <li>Click <strong>Settings</strong> at the top of your repository</li>
+            <li>Click <strong>Pages</strong> in the left sidebar</li>
+            <li>Under "Build and deployment", select <strong>main</strong> branch</li>
+            <li>Click <strong>Save</strong></li>
+          </ul>
+        </li>
+        
+        <li>
+          <span class="step-number">4</span><strong>View your game online</strong><br>
+          After a few seconds, your game will be live at:<br>
+          <code>https://YOUR-USERNAME.github.io/robot-runner/</code><br>
+          (Replace YOUR-USERNAME with your GitHub username)
+        </li>
+      </ol>
     </div>
 
     <div class="card">
       <h2>Helpful Resources</h2>
-      <p>Stuck? Check these out:</p>
-      
-      <div class="asset-link">
-        <strong>Canvas API:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank">MDN - Draw shapes and graphics</a>
-      </div>
-      
-      <div class="asset-link">
-        <strong>Game Loop:</strong> <a href="https://developer.mozilla.org/en-US/docs/Games/Anatomy" target="_blank">MDN - How game loops work</a>
-      </div>
-      
-      <div class="asset-link">
-        <strong>Keyboard Input:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent" target="_blank">MDN - Detect key presses</a>
-      </div>
+      <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank">MDN Canvas API</a> - Draw shapes and graphics</li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent" target="_blank">MDN Keyboard Events</a> - Detect key presses</li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Games/Anatomy" target="_blank">MDN Game Loop</a> - How game loops work</li>
+      </ul>
     </div>
 
     <div class="card">
-      <h2>Tips for Success</h2>
+      <h2>Tips</h2>
       <ul>
-        <li><strong>Start simple:</strong> Get the game loop working first, add complexity later.</li>
-        <li><strong>Test constantly:</strong> Save your code and refresh to see changes immediately.</li>
-        <li><strong>Break it down:</strong> Work on one thing at a time (jumping, then obstacles, then collisions).</li>
-        <li><strong>Use the browser console:</strong> Press F12 to see errors and debug.</li>
-        <li><strong>Ask for help:</strong> Stuck? Describe what you're trying to do.</li>
+        <li><strong>Start simple:</strong> Draw the robot and obstacles first, then add movement.</li>
+        <li><strong>Test constantly:</strong> Save and refresh to see your changes.</li>
+        <li><strong>Break it down:</strong> Work on one feature at a time.</li>
+        <li><strong>Use the console:</strong> Press F12 to see errors.</li>
       </ul>
     </div>
 
@@ -163,12 +220,11 @@
       <h2>What's Next?</h2>
       <p>Once your game works, try adding:</p>
       <ul>
-        <li>Better graphics and colors</li>
+        <li>Better graphics and animations</li>
         <li>Sound effects</li>
-        <li>Different types of obstacles</li>
-        <li>Power-ups or special items</li>
-        <li>A high score leaderboard</li>
-        <li>Mobile controls (touch/swipe)</li>
+        <li>Different obstacle types</li>
+        <li>Power-ups</li>
+        <li>A high score tracker</li>
       </ul>
     </div>
   </main>
